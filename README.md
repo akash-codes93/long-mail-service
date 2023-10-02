@@ -111,7 +111,7 @@ python manage.py train_details --train-id 2
 ```
 
 
-## Assumptions:
+## Assumptions
 - Scheduling of train is a done manually using cli command **_schedule_parcel_** after all the parcels and trains are created in the system.
 - Src and dest for all parcels are fixed.
 - Train is available again as soon as it completes the trip (we do not consider the return time)
@@ -120,7 +120,7 @@ python manage.py train_details --train-id 2
 - There are no delays in train, it completes trips in time and no wreckage is present.
 - Since there is no async jobs running. DB updates (to mark the train trips complete) happens when a new task comes in.
 
-## Algorithm:
+## Algorithm
 - for all available train - line combinations we have applied _0-1 knapsack algorithm_
 - then finding out which combination delivers maximum parcels with minimum cost
  
