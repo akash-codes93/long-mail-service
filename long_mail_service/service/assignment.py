@@ -35,7 +35,7 @@ class AssignmentService:
             }
         elif len(available_parcels) == 0:
             return {
-                "message": "No available parcels. Please add new parcels"
+                "message": "No available parcels. Please add new parcels."
             }
         elif len(available_trains) == 0:
             return {

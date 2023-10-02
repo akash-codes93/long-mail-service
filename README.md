@@ -1,5 +1,7 @@
 ## LONG MAIL SERVICE
 
+This is a service for scheduling mails on trains in a cost optimised technique.
+
 ## Schema Design
 
 Below is the schema design of the application
@@ -70,7 +72,7 @@ python manage.py train_details --train-id 2
 ```
 
 ```python
-{"train": {"id": 1, "unit_cost": 50.0, "name": "train1", "cost": 100, "weight": 500, "volume": 200, "created_at": "2023-10-02T09:17:28.530689Z", "updated_at": "2023-10-02T09:17:28.532229Z", "lines": [1, 2]}, "trips": [{"id": 2, "end_time": null, "start_time": "2023-10-02T09:54:12.422179Z", "is_completed": false, "train": 1, "line": 1, "parcels": [{"cost": 125.0, "id": 2}]}]}
+{"train": {"id": 1, "unit_cost": 50.0, "name": "train1", "cost": 100, "weight": 500, "volume": 200, "created_at": "2023-10-02T09:17:28.530689Z", "updated_at": "2023-10-02T09:17:28.532229Z", "lines": [1, 2]}, "trips": [{"id": 2, "end_time": NULL, "start_time": "2023-10-02T09:54:12.422179Z", "is_completed": false, "train": 1, "line": 1, "parcels": [{"cost": 125.0, "id": 2}]}]}
 ```
 
 
@@ -94,7 +96,7 @@ python manage.py train_details --train-id 2
  python manage.py parcel_details --parcel-id 2
 ```
 ```python
-{"parcel": 2, "booking": 1, "cost": 100, "trip": {"id": 1, "end_time": "2023-10-02T09:23:02.867772Z", "start_time": "2023-10-02T09:20:02.867772Z", "is_completed": true, "train": 1, "line": 1}}
+{"parcel": 2, "booking": 1, "cost": 100, "trip": {"id": 1, "end_time": "2023-10-02T09:23:02.867772Z", "start_time": "2023-10-02T09:20:02.867772Z", "is_completed": True, "train": 1, "line": 1}}
 ```
 
 - **Schedule Parcels**: This api is used to schedule parcels in trains and lines
