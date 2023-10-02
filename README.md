@@ -114,8 +114,9 @@ python manage.py train_details --train-id 2
 ## Assumptions
 - Scheduling of train is a done manually using cli command **_schedule_parcel_** after all the parcels and trains are created in the system.
 - Src and dest for all parcels are fixed.
+- If a parcel cannot be scheduled for capacity reason it will display message _Parcel did not schedule due to optimisation in this run. Please wait for next schedule._
 - Train is available again as soon as it completes the trip (we do not consider the return time)
-- Cost of parcels in train is fixed independent of the size of the parcel just that train should have space to accommodate the parcel.
+- Cost of parcels in train is depends on the density of the parcel just that train should have space to accommodate the parcel.
 - Time to complete the trip is 3 mins (instead of hrs for testing purposes)
 - There are no delays in train, it completes trips in time and no wreckage is present.
 - Since there is no async jobs running. DB updates (to mark the train trips complete) happens when a new task comes in.
@@ -123,4 +124,3 @@ python manage.py train_details --train-id 2
 ## Algorithm
 - for all available train - line combinations we have applied _0-1 knapsack algorithm_
 - then finding out which combination delivers maximum parcels with minimum cost
- 
