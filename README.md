@@ -1,26 +1,35 @@
 ## LONG MAIL SERVICE
 
-#### Schema Design
+## Schema Design
 
 Below is the schema design of the application
 
 ![schema.jpg](schema.png)
 
-#### Design Pattern
+### Schema details
+
+- **Train**: Details about train 
+- **Parcel**: Parcel Info
+- **Line**: Info about line
+- **Trains_Lines**: Many-to-Many relation b/w trains and lines
+- **Trip**: Trains taking trip to deliver parcel at which line, at start_time, and it completed or not.
+- **Booking**: Contains parcels booking in which train id, one-to-many relation b/w trip and bookings.
+
+## Design Pattern
 
 We have used **_domain driven design pattern_** to create this application. Different layers in the application are:
 - **Service**: Coordination with models and business logic is present. Present inside the _service_ _folder_
 - **Api**: Public functions and access points, presentation logic. Present in _api.py_ file
 - **Models**: Object models and storage, simple information logic Present in _models.py_ file.
 
-#### Installation
+## Installation
  You can use any virtual environment of your choice to execute this application. I have used **_python == 3.10.4_** for 
  development purpose.
 
 You can install all the dependencies from the file _requirements.txt_
 
 
-#### Test Case
+## Test Case
 
 Django inbuilt used unittest to create testcases. We have created following two type of test cases here:
 - **Unit test**: These are test written to test the base classes and features of application. Present inside the folder _service/test_unit_
@@ -33,7 +42,7 @@ coverage run ./manage.py test long_mail_service
 coverage report 
 ```
 
-#### CLI Description
+## CLI Description
 
 Following are the CLI commands created to check application. You can also use **_--help_** to check documentation on APIs
 
@@ -100,7 +109,7 @@ python manage.py train_details --train-id 2
 ```
 
 
-#### Assumptions:
+## Assumptions:
 - Scheduling of train is a done manually using cli command **_schedule_parcel_** after all the parcels and trains are created in the system.
 - Src and dest for all parcels are fixed.
 - Train is available again as soon as it completes the trip (we do not consider the return time)
@@ -109,7 +118,7 @@ python manage.py train_details --train-id 2
 - There are no delays in train, it completes trips in time and no wreckage is present.
 - Since there is no async jobs running. DB updates (to mark the train trips complete) happens when a new task comes in.
 
-#### Algorithm:
+## Algorithm:
 - for all available train - line combinations we have applied _0-1 knapsack algorithm_
 - then finding out which combination delivers maximum parcels with minimum cost
  
