@@ -7,6 +7,9 @@ class Command(BaseCommand):
     This command is used to schedule parcel
     """
 
+    def add_arguments(self, parser):
+        parser.add_argument("--strategy", type=str, help="Id of train")
+
     def handle(self, *args, **options):
-        parcel_id =  PostMasterAPI.schedule_parcel()
+        parcel_id =  PostMasterAPI.schedule_parcel(options["strategy"])
         return "Schedule: " + str(parcel_id)

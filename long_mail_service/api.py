@@ -9,6 +9,7 @@ from long_mail_service.service.parcel import parcel_service
 from long_mail_service.service.train import train_service
 from long_mail_service.service.trip import trip_service
 from long_mail_service.service.assignment import assignment_service
+from long_mail_service.service.strategy import strategy_manager
 
 trip_service.complete_trips()
 
@@ -94,6 +95,8 @@ class ParcelAPI:
 
 class PostMasterAPI:
     @staticmethod
-    def schedule_parcel():
-        return assignment_service.schedule_parcel()
+    def schedule_parcel(strategy_name):
+
+        strategy_class = strategy_manager.map_strategy(strategy_name)()
+        return assignment_service(strategy_class).schedule_parcel()
 

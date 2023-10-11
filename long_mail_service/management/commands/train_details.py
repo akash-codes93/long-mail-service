@@ -15,6 +15,6 @@ class Command(BaseCommand):
         parser.add_argument("--train-id", type=str, help="Id of train")
 
     def handle(self, *args, **options):
-        details =  TrainAPI.get_train_details(options["train_id"])
+        details = TrainAPI.get_train_details(options["train_id"])
         details = json.dumps(details)
         return "Train details: " + details

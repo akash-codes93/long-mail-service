@@ -7,8 +7,8 @@ from long_mail_service.service.serializers import BookingSerializer
 class BookingService:
 
     @staticmethod
-    def create_booking(trip_id: int, parcel_id: int, cost: int) -> int:
-        booking = Booking.objects.create(trip_id=trip_id, parcel_id=parcel_id, cost=cost)
+    def create_booking(trip_id: int, parcel_id: int, cost: int, strategy_name: str) -> int:
+        booking = Booking.objects.create(trip_id=trip_id, parcel_id=parcel_id, cost=cost, strategy=strategy_name)
         booking.save()
 
         return BookingSerializer(booking).data

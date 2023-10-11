@@ -61,9 +61,11 @@ class Trip(models.Model):
         db_table = 'trips'
 
 
+
 class Booking(models.Model):
     parcel = models.ForeignKey(Parcel, on_delete=models.CASCADE)
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    strategy = models.CharField(max_length=20, null=True)
     cost = models.FloatField()
 
     class Meta:
