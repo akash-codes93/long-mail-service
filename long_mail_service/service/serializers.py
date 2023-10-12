@@ -2,17 +2,17 @@ from rest_framework import serializers
 from long_mail_service.models import *
 
 
-class TrainSerializer(serializers.ModelSerializer):
-    unit_cost = serializers.FloatField()
-
-    class Meta:
-        model = Train
-        fields = '__all__'
-
-
 class LineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Line
+        fields = ("id",)
+
+
+class TrainSerializer(serializers.ModelSerializer):
+    unit_cost = serializers.FloatField(required=False)
+
+    class Meta:
+        model = Train
         fields = '__all__'
 
 
