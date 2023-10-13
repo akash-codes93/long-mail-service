@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.conf.urls import include
+from .healthcheck import HealthCheckView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path('health/$', HealthCheckView.as_view(), name='health-check'),
     re_path('api/(?P<version>(v1|v2))/', include('long_mail_service.urls'), name='api'),
 ]

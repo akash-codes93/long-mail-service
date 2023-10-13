@@ -1,0 +1,31 @@
+{{- $fullName := include "helm.fullname" . -}}
+{{- $labels := include "chart.labels" . | nindent 4 }}
+{{- $ingress := .Values.ingress }}
+
+{{- if $ingress.enabled -}}
+{{- range $ingress.objects }}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{ $labels }}
+  annotations:
+    {{- toYaml .annotations | trimSuffix "\n" | nindent 4 }}
+spec:
+  rules:
+  {{- range .hosts }}
+  - host: {{ .name }}
+    http:
+      paths:
+      - path: {{ default "/" .path }}
+        pathType: {{ .pathType  | default "ImplementationSpecific" }}
+        backend:
+          service:
+            name: {{ .backendsvc | default $fullName  }}
+            port:
+              number: {{ .servicePort }}
+  {{- end }}
+{{- end -}}
+{{- end }}

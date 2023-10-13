@@ -1,0 +1,36 @@
+labels:
+  app: "jenfi-job"
+
+
+jobs:
+  - name: get-details
+    enabled: true
+    image:
+      repository: jenfi
+      tag: v1
+      pullPolicy: IfNotPresent
+    command:
+      - "python"
+      - "manage.py"
+      - "train_details"
+      - "--train-id"
+      - "1"
+
+    annotations:
+      hook: 'pre-install,pre-upgrade'
+      hookweight: '-2'
+      hookpolicy: 'hook-succeeded'
+
+    ttlSecondsAfterFinished: '100'
+    activeDeadlineSeconds: '120'
+    Parallelism: 1
+    Completions: 1
+    startingDeadlineSeconds: 10
+    terminationGracePeriodSeconds: 50
+    env:
+      user: 'akash'
+    restartPolicy: Never
+    securityContext: {}
+
+hpa:
+  replicaCount: 1

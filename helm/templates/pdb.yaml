@@ -1,0 +1,20 @@
+{{- if or (and .Values.hpa.autoscaling.enabled (gt (.Values.hpa.autoscaling.minReplicas | int) 1)) (gt (.Values.hpa.replicaCount | int) 1) }}
+{{- if .Values.app.budget -}}
+{{- if .Values.app.budget.minAvailable -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "helm.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.budget.enabled }}
+  minAvailable: {{ .Values.budget.minAvailable }}
+  {{- end}}
+  selector:
+    matchLabels:
+      {{- include "chart.selectors" . | nindent 6 }}
+      app.kubernetes.io/component: web
+{{- end -}}
+{{- end -}}
+{{- end -}}

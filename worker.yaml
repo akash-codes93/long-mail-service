@@ -1,0 +1,61 @@
+labels:
+  app: "jenfi-worker"
+
+
+app:
+  image:
+    repository: jenfi
+    tag: v1
+    pullPolicy: IfNotPresent
+  command:
+   - "python"
+   - "manage.py"
+   - "train_details"
+   - "--train-id"
+   - "1"
+
+
+hpa:
+  replicaCount: 2
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+      type: Resource
+
+
+deployment:
+  # Control if we want to use a deployment.
+  dnspolicy: "ClusterFirst"
+  enabled: true
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 25%
+    type: RollingUpdate
+  templateAnnotations: {}
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+  restartPolicy: Always
+  securityContext: {}
+  hostnetwork:
+    enabled: false
+  annotations:
+    kube-score/ignore: pod-networkpolicy,container-security-context,pod-probes
+  sharedVolumes: []
+  hostPathSharedVolumes: []
+

@@ -1,0 +1,192 @@
+# Default values for django.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+preInstall:
+  enabled: true
+  activeDeadlineSeconds: 900
+
+existingSecret: ""
+
+budget:
+  enabled: false
+  minAvailable: 1    # Ignored when replicaCount is 1
+
+secret:
+
+
+app:
+  image:
+#    repository: jenfi
+#    tag: v1
+#    pullPolicy: Always
+#  command:
+#   - "uwsgi"
+#   - "--ini"
+#   - "uwsgi_config.ini"
+
+#  port: 8080
+  envSecrets: {}
+  env:
+  podAnnotations: {}
+#  livenessProbe:
+#    httpGet:
+#      path: /health/
+#      scheme: HTTP
+#      port: 8080
+#    initialDelaySeconds: 40
+#    timeoutSeconds: 5
+#    periodSeconds: 30
+#    successThreshold: 1
+#    failureThreshold: 3
+#  readinessProbe:
+#    httpGet:
+#      path: /health/
+#      scheme: HTTP
+#      port: 8080
+#    initialDelaySeconds: 30
+#    timeoutSeconds: 5
+#    periodSeconds: 10
+#    successThreshold: 1
+#    failureThreshold: 2
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
+
+
+hpa:
+  replicaCount: 2
+  autoscaling:
+    enabled: false
+#    minReplicas: 2
+#    maxReplicas: 10
+#    targetCPUUtilizationPercentage: 80
+#  metrics:
+#    - resource:
+#        name: cpu
+#        target:
+#          type: Utilization
+#          averageUtilization: 80
+#      type: Resource
+#    - resource:
+#        name: memory
+#        target:
+#          type: Utilization
+#          averageUtilization: 80
+#      type: Resource
+
+deployment:
+  # Control if we want to use a deployment.
+  dnspolicy: "ClusterFirst"
+  enabled: false
+#  strategy:
+#    rollingUpdate:
+#      maxSurge: 0
+#      maxUnavailable: 25%
+#    type: RollingUpdate
+#  templateAnnotations: {}
+#  affinity: {}
+#  nodeSelector: {}
+#  tolerations: []
+#  restartPolicy: Always
+#  securityContext: {}
+#  hostnetwork:
+#    enabled: false
+#  annotations:
+#    kube-score/ignore: pod-networkpolicy,container-security-context,pod-probes
+#  sharedVolumes: []
+#  hostPathSharedVolumes: []
+
+
+imageCredentials:
+  password: ""
+  registry: ""
+  username: ""
+
+serviceaccount:
+  enabled: false
+  name: sa1
+  annotations: {}
+
+service:
+  enabled: false
+#  scrape: enabled
+#  type: ClusterIP
+#  name: ""
+#  ports:
+#  - name: http
+#    port: 80
+#    protocol: TCP
+#    targetPort: 8080
+
+
+ingress:
+  enabled: false
+#  objects:
+#    - name: ""
+#      annotations:
+#        kubernetes.io/ingress.class: nginx
+#        nginx.ingress.kubernetes.io/proxy-body-size: 75m
+#      hosts:
+#        - name: chart-example.local
+#          path: /api
+#          servicePort: 80
+#          pathType: Prefix
+
+
+#jobs:
+#  - name: migrate-db-job
+#    enabled: false
+
+#    annotations:
+#      hook: 'pre-install,pre-upgrade'
+#      hookweight: '-2'
+#      hookpolicy: 'hook-succeeded'
+#    image:
+#      repository: ""
+#      tag: 3b5cb126
+#      imagePullPolicy: IfNotPresent
+#    ttlSecondsAfterFinished: '110'
+#    activeDeadlineSeconds: '120'
+#    Parallelism: 3
+#    Completions: 6
+#    startingDeadlineSeconds: 10
+#    terminationGracePeriodSeconds: 50
+#    env:
+#      FLYWAY_USER: 'flyway_user'
+#      JAVA_OPTS: '-Xms2G -Xmx2G'
+#      LOG_FILE: /dev/stdout
+#    appsecret:
+#      enabled: true
+#    restartPolicy: Never
+#    resources:
+#      limits:
+#        cpu: 500m
+#        memory: 500Mi
+#      requests:
+#        cpu: 50m
+#        memory: 50Mi
+#    nodeSelector:
+#      type: infra
+#    tolerations:
+#    - effect: NoSchedule
+#      operator: Exists
+#    affinity:
+#      nodeAffinity:
+#        requiredDuringSchedulingIgnoredDuringExecution:
+#          nodeSelectorTerms:
+#          - matchExpressions:
+#            - key: kubernetes.io/e2e-az-name
+#              operator: In
+#              values:
+#              - e2e-az1
+#              - e2e-az2
+#    securityContext: {}

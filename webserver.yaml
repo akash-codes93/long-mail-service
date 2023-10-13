@@ -1,0 +1,135 @@
+labels:
+  app: "jenfi-webserver"
+
+secret:
+  enabled: true
+  akash: "gupta"
+
+app:
+  image:
+    repository: jenfi
+    tag: v1
+    pullPolicy: IfNotPresent
+  command:
+   - "uwsgi"
+   - "--ini"
+   - "uwsgi_config.ini"
+
+  port: 8080
+  envSecrets: {}
+  env:
+    my_variable: "This is my variable"
+  budget:
+    minAvailable: 1 # Ignored when replicaCount is 1
+  podAnnotations: {}
+  livenessProbe:
+    httpGet:
+      path: /health/
+      scheme: HTTP
+      port: 8080
+    initialDelaySeconds: 40
+    timeoutSeconds: 5
+    periodSeconds: 30
+    successThreshold: 1
+    failureThreshold: 3
+  readinessProbe:
+    httpGet:
+      path: /health/
+      scheme: HTTP
+      port: 8080
+    initialDelaySeconds: 30
+    timeoutSeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 2
+  resources:
+    limits:
+      cpu: 500m
+      memory: 500Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
+
+hpa:
+  replicaCount: 2
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+      type: Resource
+    - resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+      type: Resource
+
+deployment:
+  # Control if we want to use a deployment.
+  dnspolicy: "ClusterFirst"
+  enabled: true
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 25%
+    type: RollingUpdate
+  templateAnnotations: {}
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+  restartPolicy: Always
+  securityContext: {}
+  hostnetwork:
+    enabled: false
+  annotations:
+    kube-score/ignore: pod-networkpolicy,container-security-context,pod-probes
+  sharedVolumes: []
+  hostPathSharedVolumes: []
+
+
+imageCredentials:
+  password: ""
+  registry: ""
+  username: ""
+
+serviceaccount:
+  enabled: false
+  name: sa1
+  annotations: {}
+
+service:
+  enabled: true
+  scrape: enabled
+  type: ClusterIP
+  name: ""
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+
+
+ingress:
+  enabled: true
+  objects:
+    - name: ""
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/proxy-body-size: 75m
+      hosts:
+        - name: chart-example.local
+          path: /api
+          servicePort: 80
+          pathType: Prefix
+
+
+budget:
+  enabled: true
+  minAvailable: 1    # Ignored when replicaCount is 1
