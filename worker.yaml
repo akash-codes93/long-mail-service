@@ -12,8 +12,7 @@ app:
    - "manage.py"
    - "train_details"
    - "--train-id"
-   - "1"
-
+   - "1"  # need to be a while loop
 
 hpa:
   replicaCount: 2

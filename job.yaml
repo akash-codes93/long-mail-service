@@ -11,11 +11,12 @@ jobs:
       pullPolicy: IfNotPresent
     command:
       - "python"
+    args:
+      - "-u"
       - "manage.py"
       - "train_details"
       - "--train-id"
       - "1"
-
     annotations:
       hook: 'pre-install,pre-upgrade'
       hookweight: '-2'
