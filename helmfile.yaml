@@ -10,6 +10,13 @@ environments:
 {{- $services := .Environment.Values.services }}
 {{- $env := .Environment.Name }}
 
+helmDefaults:
+  force: false
+  timeout: {{env "HELMFILE_TIMEOUT"| default "600" }}
+  verify: false
+  wait: true
+  atomic: true
+
 
 releases:
 {{- range $service:= $services }}
