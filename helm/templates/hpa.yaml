@@ -1,7 +1,7 @@
 {{- $hpa := .Values.hpa }}
 
 {{- if .Values.hpa.autoscaling.enabled -}}
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "helm.fullname" . }}

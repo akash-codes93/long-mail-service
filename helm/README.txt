@@ -36,3 +36,15 @@
 #    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ $service }}-secrets.yaml.gotmpl
 #    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/{{ $service }}-vars.yaml.gotmpl
 #    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/{{ $service }}-secrets.yaml.gotmpl
+
+
+# set environment varibale for namespace
+# helmfile
+# lint
+# helmfile lint --environment local
+
+# diff
+# helmfile diff --environment local
+
+# apply
+# helmfile apply --environment local

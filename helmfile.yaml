@@ -21,6 +21,6 @@ releases:
     installed: true
     values:
 
-    - deploy/{{ $env }}/{ $service }}.yaml.gotmpl
+    - deploy/{{ $env }}/{{ $service }}.yaml.gotmpl
 
 {{end}}
