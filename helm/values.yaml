@@ -12,11 +12,9 @@ preInstall:
 
 existingSecret: ""
 
-budget:
-  enabled: false
-  minAvailable: 1    # Ignored when replicaCount is 1
 
 secret:
+  demo: secret
 
 
 app:
@@ -30,6 +28,8 @@ app:
 #   - "uwsgi_config.ini"
 
 #  port: 8080
+  budget:
+#    minAvailable: 1    # Ignored when replicaCount is 1
   envSecrets: {}
   env:
   podAnnotations: {}

@@ -1,0 +1,26 @@
+
+environments:
+  local:
+    values:
+    - services:
+      - webserver
+      - job
+
+
+{{- $services := .Environment.Values.services }}
+{{- $env := .Environment.Name }}
+
+
+releases:
+{{- range $service:= $services }}
+  - name: {{ $service | lower }}
+    namespace: {{ requiredEnv "NAMESPACE" }}
+    chart: {{ env "HELM_CHART" | default "helm" }}
+    version: {{ env "HELM_CHART_VERSION" | default "0.1.0" }}
+    missingFileHandler: Info
+    installed: true
+    values:
+
+    - deploy/{{ $env }}/{ $service }}.yaml.gotmpl
+
+{{end}}

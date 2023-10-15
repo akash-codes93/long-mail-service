@@ -8,8 +8,8 @@ metadata:
   labels:
     {{- include "chart.labels" . | nindent 4 }}
 spec:
-  {{- if .Values.budget.enabled }}
-  minAvailable: {{ .Values.budget.minAvailable }}
+  {{- if .Values.app.budget }}
+  minAvailable: {{ .Values.app.budget.minAvailable }}
   {{- end}}
   selector:
     matchLabels:

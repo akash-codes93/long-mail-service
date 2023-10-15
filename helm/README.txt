@@ -17,3 +17,22 @@
 # helm install --debug --dry-run jenfi helm
 # helm install --debug --dry-run jenfi-webserver helm/ -f webserver.yaml
 # helm install --debug --dry-run jenfi-worker helm/ -f worker.yaml
+
+# helm file doc
+# https://helmfile.readthedocs.io/en/latest/#values-files-templates
+
+# install helm diff [required for apply]
+# helm plugin install https://github.com/databus23/helm-diff
+
+#    - vars/vars.yaml.gotmpl
+#    - vars/secrets.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/vars.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/secrets.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/vars.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/secrets.yaml.gotmpl
+#    - vars/{{ $service }}-vars.yaml.gotmpl
+#    - vars/{{ $service }}-secrets.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ $service }}-vars.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ $service }}-secrets.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/{{ $service }}-vars.yaml.gotmpl
+#    - vars/{{ requiredEnv "ENVIRONMENT" }}/{{ requiredEnv "REGION" }}/{{ $service }}-secrets.yaml.gotmpl

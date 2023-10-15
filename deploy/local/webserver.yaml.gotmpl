@@ -115,7 +115,6 @@ service:
     protocol: TCP
     targetPort: 8080
 
-
 ingress:
   enabled: true
   objects:
@@ -127,7 +126,7 @@ ingress:
         - name: chart-example.local
           path: /api
           servicePort: 80
-          pathType: Prefix
+          pathType: ImplementationSpecific # Prefix
 
 
 budget:
