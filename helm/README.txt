@@ -59,3 +59,4 @@
 
 # eksctl to create kubernetes
 # gpg with git crypt
+# https://buddy.works/guides/git-crypt
