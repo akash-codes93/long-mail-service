@@ -58,4 +58,4 @@
 # https://antonputra.com/
 
 # eksctl to create kubernetes
-
+# gpg with git crypt
