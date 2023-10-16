@@ -48,3 +48,14 @@
 
 # apply
 # helmfile apply --environment local
+
+# cluster autoscaler - example auto discovery
+# nginx controller
+
+# aws load balancer
+
+# anton putra youtube
+# https://antonputra.com/
+
+# eksctl to create kubernetes
+

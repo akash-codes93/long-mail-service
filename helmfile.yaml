@@ -28,6 +28,7 @@ releases:
     installed: true
     values:
 
+    - deploy/{{ $env }}/secrets.yaml.gotmpl
     - deploy/{{ $env }}/{{ $service }}.yaml.gotmpl
 
 {{end}}
