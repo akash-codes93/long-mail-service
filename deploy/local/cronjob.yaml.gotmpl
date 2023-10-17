@@ -1,0 +1,37 @@
+labels:
+  app: "jenfi-cronjob"
+
+cronjobs:
+  - name: get-details-etl
+    enabled: true
+    image:
+      repository: jenfi
+      tag: v1
+      imagePullPolicy: IfNotPresent
+    command:
+      - "python"
+    args:
+      - "-u"
+      - "manage.py"
+      - "train_details"
+      - "--train-id"
+      - "1"
+    env:
+      user: 'akash'
+    appenv:
+      enabled: false
+    appsecret:
+      enabled: true
+
+    schedule: '* * * * *'
+    suspend: true
+    failedJobsHistoryLimit: 5
+    successfulJobsHistoryLimit: 10
+    concurrencyPolicy: Forbid
+    restartPolicy: OnFailure
+    terminationGracePeriodSeconds: 50
+    completions: 6
+    startingDeadlineSeconds: 10
+
+hpa:
+  replicaCount: 1
