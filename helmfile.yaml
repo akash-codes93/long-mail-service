@@ -5,6 +5,7 @@ environments:
     - services:
       - webserver
       - job
+      - cronjob
 
 
 {{- $services := .Environment.Values.services }}
