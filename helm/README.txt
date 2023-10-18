@@ -48,3 +48,7 @@
 
 # apply
 # helmfile apply --environment local
+
+# git tag
+# git tag v1.2.0
+# git push origin --tag
