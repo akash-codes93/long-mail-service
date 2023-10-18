@@ -1,3 +1,7 @@
+repositories:
+  - name: "helm_charts"
+#    url: 'git+https://github.com/harishbisht/generic-helm@charts?ref=v1.1.2'
+    url: 'git+https://github.com/akash-codes93/helm_charts@charts?ref={{ env "HELM_CHARTS_REF" | default "v1.1.1" }}'
 
 environments:
   local:
@@ -11,8 +15,9 @@ environments:
 {{- $services := .Environment.Values.services }}
 {{- $env := .Environment.Name }}
 
+
 helmDefaults:
-  force: false
+#  force: false
   timeout: {{env "HELMFILE_TIMEOUT"| default "600" }}
   verify: false
   wait: true
@@ -23,13 +28,13 @@ releases:
 {{- range $service:= $services }}
   - name: {{ $service | lower }}
     namespace: {{ requiredEnv "NAMESPACE" }}
-    chart: {{ env "HELM_CHART" | default "helm" }}
+    chart: helm_charts/{{ env "HELM_CHART" | default "base" }}
     version: {{ env "HELM_CHART_VERSION" | default "0.1.0" }}
     missingFileHandler: Info
     installed: true
     values:
 
-    - deploy/{{ $env }}/secrets.yaml.gotmpl
+#    - deploy/{{ $env }}/secrets.yaml.gotmpl
     - deploy/{{ $env }}/{{ $service }}.yaml.gotmpl
 
 {{end}}
